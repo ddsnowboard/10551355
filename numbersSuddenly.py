@@ -5,9 +5,9 @@ minlen = 3 #it's better this way
 NUMBER_OF_WORDS = 50
 
 subs = [
-	#almost entirely senseless variation
-	('sics', '6'),
-	('nein', '9'),
+    #almost entirely senseless variation
+    ('sics', '6'),
+    ('nein', '9'),
     ('ue', '00'),
     ('ah', '44'),
     ('ew', '300'),
@@ -16,20 +16,20 @@ subs = [
     ('oe', '0'),
     #numberHomophones:number
     ('won', '1'),
-	('too', '2'),
+    ('too', '2'),
     ('to', '2'),
     ('for', '4'),
     #('fore', '4'), #fore is represented as 43
     ('ate', '8'),
     #number spelt in word:number(s) - Theoretically infinite
     ('one', '1'),
-	('two', '2'),
-	('three', '3'),
+    ('two', '2'),
+    ('three', '3'),
     ('four', '4'),
-	('five', '5'),
-	('six', '6'),
-	('seven', '7'),
-	('eight', '8'),
+    ('five', '5'),
+    ('six', '6'),
+    ('seven', '7'),
+    ('eight', '8'),
     ('nine', '9'),
     ('ten', '10'),
     #increase in complexity/bizzareness (don't actually do anything)
@@ -38,8 +38,8 @@ subs = [
     #('thirteen', '13'),
     #('fourteen', '14'),
     #1:1 letter:number(s)
-	('b', '13'), #adds complication
-	('z', '2'),
+    ('b', '13'), #adds complication
+    ('z', '2'),
     ('g', '6'),
     ('l', '1'),
     ('o', '0'),
@@ -97,13 +97,13 @@ output.write("""<html>
 							alert("Will scored " + willScore.toString() + "; Ian scored " + ianScore.toString());
 						}
 					</script>
-					<a href="#" id="fin" class="pure-button" onclick="show()">
+					<a id="fin" class="pure-button" onclick="show()">
 						end
 					</a>
-					<a href="#" id="will" class="pure-button" onclick="will()">
+					<a id="will" class="pure-button" onclick="will()">
 						willPoint
 					</a>
-					<a href="#" id="ian" class="pure-button" onclick="ian()">
+					<a id="ian" class="pure-button" onclick="ian()">
 						ianPoint
 					</a>
 					<table  border=1 frame=void rules=rows>""")
