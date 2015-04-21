@@ -1,5 +1,6 @@
 import re
 from random import shuffle
+import sys
 
 minlen = 3 #it's better this way
 NUMBER_OF_WORDS = 50
@@ -51,8 +52,15 @@ subs = [
 
 reHexWord = re.compile("[0-9]*")
 gue = re.compile("gue") #removing phonetically dissimlar 'ue's
-fWords = open('/usr/share/dict/words', 'r')
+if sys.platform == "win32":
+    fWords = open("enable1.txt")
+else:
+    fWords = open('/usr/share/dict/words', 'r')
 output = open("output.html", 'w')
+if sys.version_info[0] >= 3:
+    fWords.xreadlines = fWords.readlines
+    xrange = range
+    
 output.write("""<html>
 					<style>	.spoiler{
 								color:white;}
