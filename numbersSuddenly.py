@@ -2,9 +2,16 @@ import re
 from random import shuffle
 import sys
 
+def format(**kwargs):
+    """
+    words is a list of words
+    length is the amount of words per page
+    """
+    s = open("base.html").read();
+    return s.format(words=",".join(kwargs["words"]), length=kwargs["length"], total=len(kwargs['words']))
+    
 minlen = 3 #it's better this way
 NUMBER_OF_WORDS = 50
-
 subs = [
     #almost entirely senseless variation
     ('sics', '6'),
@@ -60,61 +67,6 @@ output = open("output.html", 'w')
 if sys.version_info[0] >= 3:
     fWords.xreadlines = fWords.readlines
     xrange = range
-    
-output.write("""<html>
-					<style>	.spoiler{
-								color:white;}
-							.pure-button{
-								font-family: inherit;
-								font-size: 100%;
-								padding: .5em 1em;
-								color: #444;
-								color: rgba(0,0,0,.8);
-								border: 1px solid #999;
-								border: 0 rgba(0,0,0,0);
-								background-color: #E6E6E6;
-								text-decoration: none;
-								border-radius: 2px;
-								position: fixed;
-								margin-right:5px;}
-							.pure-button:active{
-								background-color:red;}
-							#ian{
-								right: 60;
-							}
-							#will{
-								right: 150;
-							}
-							#fin{
-								right: 0;
-							}
-					</style>
-					<script>
-						var willScore = 0;
-						var ianScore = 0;
-						function ian()
-						{
-							++ianScore;
-						}
-						function will()
-						{
-							++willScore;
-						}
-						function show()
-						{
-							alert("Will scored " + willScore.toString() + "; Ian scored " + ianScore.toString());
-						}
-					</script>
-					<a id="fin" class="pure-button" onclick="show()">
-						end
-					</a>
-					<a id="will" class="pure-button" onclick="will()">
-						willPoint
-					</a>
-					<a id="ian" class="pure-button" onclick="ian()">
-						ianPoint
-					</a>
-					<table  border=1 frame=void rules=rows>""")
 end = []
 for w in fWords.xreadlines():
     w = w.strip()
@@ -124,8 +76,7 @@ for w in fWords.xreadlines():
     if len(w) >= minlen:
         match = reHexWord.search(w)
         if match and match.group() == w and not gue.search(z):
-            end.append("<td class=\"spoiler\" onclick=\"this.style.color=\'black\'\">%s </td><td> %s </td>\n" % (z,w))
-output.write("There were %d words; here are %d:" % (len(end), NUMBER_OF_WORDS))
+            end.append(r""""<tr><td class=\"spoiler\" onclick=\"this.style.color='black'\">%s </td><td> %s </td></tr>"
+            """ % (z,w))
 shuffle(end) #If you've seen the list, it's no longer a game
-output.write("".join(["<tr id=\"%d\"><td>%d</td>%s</tr>" % (i+1, i+1, j) for i, j in enumerate(end)][:NUMBER_OF_WORDS]))
-output.write("</table></html>")
+output.write(format(words=end, length=NUMBER_OF_WORDS))

@@ -1,0 +1,103 @@
+<html>
+    <head>
+        <meta name="generator"
+        content="HTML Tidy for HTML5 (experimental) for Windows https://github.com/w3c/tidy-html5/tree/c63cc39" />
+        <style>
+ .spoiler{{
+		color:white;}}
+.pure-button{{
+		font-family: inherit;
+		font-size: 100%;
+		padding: .5em 1em;
+		color: #444;
+		color: rgba(0,0,0,.8);
+		border: 1px solid #999;
+		border: 0 rgba(0,0,0,0);
+		background-color: #E6E6E6;
+		text-decoration: none;
+		border-radius: 2px;
+		position: fixed;
+		margin-right:5px;}}
+.pure-button:active{{
+		background-color:red;}}
+#ian{{
+		right: 60;
+}}
+#will{{
+		right: 150;
+}}
+#fin{{
+		right: 0;
+}}
+.link {{
+	color: blue;
+	text-decoration: underline;
+	cursor: pointer;
+}}
+</style>
+<script src="jquery-2.1.1.min.js"></script>
+<script>
+var willScore = 0;
+var ianScore = 0;
+var words = [{words}]
+var pageNumber = 0;
+var WORDS_PER_PAGE = {length};
+var topEdge = WORDS_PER_PAGE >= words.length;
+var bottomEdge = true;
+function ian()
+{{
+		++ianScore;
+}}
+function will()
+{{
+		++willScore;
+}}
+function show()
+{{
+		alert("Will scored " + willScore.toString() + "; Ian scored " + ianScore.toString());
+}}
+function render(page)
+{{
+	$("#words").html("");
+	if(words.length >= WORDS_PER_PAGE*(page+1)){{
+	var currWords = words.slice(WORDS_PER_PAGE*page, WORDS_PER_PAGE*(page+1));
+	}}
+	else{{
+	var currWords = words.slice(WORDS_PER_PAGE*page, words.length);
+	}}
+	$("#words").html("");
+	for(var i = 0;i<currWords.length;i++)
+	{{
+		$("#words").append(currWords[i]);
+	}}
+}}
+$(document).ready(function(){{
+	render(pageNumber);
+	$("#next").click(function(){{
+		if(!topEdge){{
+			bottomEdge = false;
+			++pageNumber;
+			render(pageNumber);
+		}}
+	}});
+	$("#previous").click(function(){{
+		if(!bottomEdge)
+		{{
+			topEdge = false;
+			--pageNumber;
+			render(pageNumber);
+		}}
+	}});
+}});
+</script>
+        <title></title>
+    </head>
+    <body>
+    <a id="fin" class="pure-button" onclick="show()">end</a> 
+    <a id="will" class="pure-button" onclick="will()">willPoint</a> 
+    <a id="ian" class="pure-button" onclick="ian()">ianPoint</a>
+	There were {total} words; here are {length}:
+    <table border="1" frame="void" rules="rows" id="words"></table>
+	<span class="link" id="previous">< Prev</span> | <span class="link" id="next">Next ></span>
+	</body>
+</html>
